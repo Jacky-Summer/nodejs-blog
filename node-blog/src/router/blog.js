@@ -1,6 +1,13 @@
 const { SuccessModel, ErrorModel } = require('../model/resModel')
 const { getList, newBlog, updateBlog, delBlog } = require('../controller/blog')
 
+// 统一的登陆验证函数
+const loginCheck = (req) => {
+  if (!req.session.username) {
+    return Promise.resolve(new ErrorModel('尚未登陆'))
+  }
+}
+
 const handleBlogRouter = (req, res) => {
   const id = req.query.get('id')
 
